@@ -70,6 +70,7 @@ Node nodeDel(Node head, Node node) { //4.删除一个node
 		}
 		target->next = NULL;
 		free(node);
+		return head;
 	}
 
 	//4.删除了不是head或者tail的结点
@@ -139,7 +140,6 @@ Node mergeSortedList(Node l1, Node l2) {
 Node listSort(Node head) {
 	Node sorted, l1, l2, item, tem;
 	if(head->next == NULL) {
-		printf("8. Now the exit condition meets.\n");
 		return head;
 	}
 	else {
@@ -152,28 +152,38 @@ Node listSort(Node head) {
 	l1 = listSort(l1);
 	l2 = listSort(l2);
 	//merge两半
-	sorted = mergeSortedList(l1,l2);
-	printf("9. Now the sorted list is:");
-
-	item = sorted;
-	while(item->next != NULL) {
-		printf("%d ", item->num);
-		item = item->next;
-	}
-	printf("%d\n\n\n", item->num);		
+	sorted = mergeSortedList(l1,l2);	
 
 	return sorted;
 	}
 }
 
+//第三大部分，删除排序后的列表中重复的元素
+Node removeDup(Node head) {
+	Node item = head;
+	Node aftItem = item->next;
+	while(aftItem != NULL){
+		if (aftItem->num == item->num){
+			item->next = aftItem->next;
+			free(aftItem);
+			aftItem = item->next;			
+		}
+		else{
+			aftItem = aftItem->next;
+			item = item->next;
+		}		
+	}
+	return head;
+}
+
 int main() {
 	Node head = nodeCreate(1);
-	printf("1. head is %d\n", head->num);
+	printf("1. head is %d\n\n\n\n", head->num);
 
-	printf("2. number %d is appended to the list and the linked list is now:\n", 1);
-	int array[] = {4, 3, 2, 7, 2, 6, 5, 9};
+	printf("2. The list and the linked list is now:\n");
+	int array[] = {4, 3, 2, 7, 2, 6, 5, 9, 5, 6, 0, 6, 11, 6};
 
-	for(int i = 0; i < 9; i++) {
+	for(int i = 0; i < 14; i++) {
 		head = listAppend(head, array[i]);
 	}
 
@@ -184,15 +194,25 @@ int main() {
 	}
 	printf("%d\n\n\n\n", item->num);
 
-	printf("7. Now we are testing listSort() function.\n\n\n\n");
-	head = listSort(head);
+	printf("3. Now we are testing listSort() function.\n");
+	Node sorted;
+	sorted = listSort(head);
 	printf("The list after sorting is:");
-	item = head;
+	item = sorted;
 	while(item->next != NULL) {
 		printf("%d ", item->num);
 		item = item->next;
 	}
-	printf("%d\n", item->num);	
+	printf("%d\n\n\n\n", item->num);	
+
+	printf("4. Now we are testing deleting the duplicated element.\n");
+	Node headFin = removeDup(sorted);
+	item = headFin;
+	while(item->next != NULL) {
+		printf("%d ", item->num);
+		item = item->next;
+	}
+	printf("%d\n", item->num);		
 
 	return 0;
 }
