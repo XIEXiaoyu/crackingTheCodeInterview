@@ -95,110 +95,104 @@ Node findMid(Node head) {
 		fast = fast->next->next;
 		slow = slow->next;
 	}
+
 	return slow;
 }
 
 //2. 用归并排列merge sort 来排序
 Node mergeSortedList(Node l1, Node l2) {
-	Node dummy = malloc
-	, p1, p2;
-	p1 = dummy; p2 = l2;
-	dummy->next = l1;
-	while(p1->next != NULL && p2!= NULL) {  //p1->next!= NULL 说明l1不是空的，用p1来记录不断变化的头指针，而l1是不变的（除非在第一次的时候把一个结点插在了它前面）
-		if(p1->next->num >= p2->num) {
-			p1->next = p2;
-			p1 = p1->next;
-			p2 = p2->next;
+	Node head, tail;
+	if(l1->num > l2->num) {
+		head = l2;
+		tail = l2;
+		l2 = l2->next;
+	} else {
+		head = l1;
+		tail = l1;
+		l1 = l1->next;
+	}
+
+	while(l1 != NULL && l2 != NULL) {
+		if(l1->num > l2->num) {
+			tail->next = l2;
+			tail = tail->next;
+			l2 = l2->next;
 		}
-		else {
-			p1 = p1->next;
+		else {    //l1 <= l2;
+			tail->next = l1;
+			tail = tail->next;
+			l1 = l1->next;
 		}
 	}
 
-	return dummy->next;
+	if(l1 != NULL) {
+		tail->next = l1;
+	}
+	else {		
+		tail->next = l2;
+	}
+
+	return head;
 }
 
-
-
-int main() {
-	Node head1 = nodeCreate(4);
-	Node head2 = nodeCreate(2);
-	printf("1. head is %d\n", head1->num);
-
-	printf("2. number %d is appended to the list and the linked list is now:\n", 1);
-	int array1[] = {3, 2, 5};
-	int array2[] = {1, 6, 7};
-	for(int i = 0; i < 3; i++) {
-		head1 = listAppend(head1, array1[i]);
-		head2 = listAppend(head2, array2[i]);
+//3. 用递归来sort整个list
+Node listSort(Node head) {
+	Node sorted, l1, l2, item, tem;
+	if(head->next == NULL) {
+		printf("8. Now the exit condition meets.\n");
+		return head;
 	}
+	else {
+	//分半
+	l1 = head;
+	tem = findMid(head);
+	l2 = tem->next;
+	tem->next = NULL;
+	//sort每半
+	l1 = listSort(l1);
+	l2 = listSort(l2);
+	//merge两半
+	sorted = mergeSortedList(l1,l2);
+	printf("9. Now the sorted list is:");
 
-	Node item = head1;
+	item = sorted;
 	while(item->next != NULL) {
 		printf("%d ", item->num);
 		item = item->next;
 	}
-	printf("%d\n", item->num);
+	printf("%d\n\n\n", item->num);		
 
-	item = head2;
+	return sorted;
+	}
+}
+
+int main() {
+	Node head = nodeCreate(1);
+	printf("1. head is %d\n", head->num);
+
+	printf("2. number %d is appended to the list and the linked list is now:\n", 1);
+	int array[] = {4, 3, 2, 7, 2, 6, 5, 9};
+
+	for(int i = 0; i < 9; i++) {
+		head = listAppend(head, array[i]);
+	}
+
+	Node item = head;
+	while(item->next != NULL) {
+		printf("%d ", item->num);
+		item = item->next;
+	}
+	printf("%d\n\n\n\n", item->num);
+
+	printf("7. Now we are testing listSort() function.\n\n\n\n");
+	head = listSort(head);
+	printf("The list after sorting is:");
+	item = head;
 	while(item->next != NULL) {
 		printf("%d ", item->num);
 		item = item->next;
 	}
 	printf("%d\n", item->num);	
-
-	// printf("3. After deleting the first node, the list now is: \n");
-	// Node target = listSearch(head, 3);
-	// head = nodeDel(head, target);
-
-	// item = head;
-	// while(item->next != NULL) {
-	// 	printf("%d ", item->num);
-	// 	item = item->next;
-	// }
-	// printf("%d\n", item->num);
-
-	// printf("4. After deleting the last node, the list now is: \n");
-	// target = listSearch(head, 2);
-	// head = nodeDel(head, target);
-	// item = head;
-	// while(item->next != NULL) {
-	// 	printf("%d ", item->num);
-	// 	item = item->next;
-	// }
-	// printf("%d\n", item->num);	
-
-	// printf("5. If a node in the middle is deleted, the list will be: \n");
-	// target = listSearch(head,4);
-	// head = nodeDel(head, target);
-	// item = head;
-	// while(item->next != NULL) {
-	// 	printf("%d ", item->num);
-	// 	item = item->next;
-	// }
-	// printf("%d\n", item->num);	
-
-	// printf("5. Let's find the middle of the list.\n");
-	// Node midPrior = findMid(head);
-	// Node mid = midPrior->next;
-	// printf("%d\n", middle->num);
-
-	// Node leftHead = head;
-	// midPrior->next = NULL;
-	// Node rightHead = mid;
-
-	printf("6. Now we are testing merge sorting.");
-	head1 = mergeSortedList(head1, head2);
-	printf("The sorted list is:\n");
-	item = head1;
-	while(item->next != NULL) {
-		printf("%d ", item->num);
-		item = item->next;
-	}
-	printf("%d\n", item->num);
-
-
-
 
 	return 0;
 }
