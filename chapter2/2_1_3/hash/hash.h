@@ -10,7 +10,7 @@
 class hash{
 
 private:
-	static const int tableSize = 10;
+	static const int tableSize = 4;
 
 	struct item{
 		std::string name;
@@ -28,6 +28,7 @@ public:
 	void PrintTable();
 	void PrintItemsInIndex(int index);
 	void FindDrink(std::string name);
+	void RemoveItem(std::string name);
 };
 
 #endif  /* HASH_H */

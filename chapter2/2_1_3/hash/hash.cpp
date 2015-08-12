@@ -127,6 +127,66 @@ void hash::FindDrink(std::string name)
 	}
 }
 
+void hash::RemoveItem(std::string name)
+{
+	int index = Hash(name);
+
+	item* delPtr;
+	item* p1;
+	item* p2;
+
+	//case 0 - bucket is empty
+	if(HashTable[index]->name == "emtpy" && HashTable[index]->drink =="empty")
+	{
+		std::cout << name << "was not found in the Hash Table\n";
+	}
+
+	//case 1 - only 1 item contained in the bucket, and match
+	else if(HashTable[index]->name == name && HashTable[index]->next == NULL)
+	{
+		HashTable[index]->name = "empty";
+		HashTable[index]->drink = "empty";
+		std::cout << name << " was removed from the Hash Table\n";
+	}
+	//case 2 - match is located in the first item in the bucket, but ther are more items in the bucket.
+	else if(HashTable[index]->name == name)
+	{
+		delPtr = HashTable[index];
+		HashTable[index] = HashTable[index]->next;
+		delete delPtr;
+
+		std::cout << name << " was removed from the Hash Table\n";
+	}
+	//case 3 - bucket contains items, but first item is not a match
+	else
+	{
+		p2 = HashTable[index];
+		p1 = p2->next;
+
+		while(p1 != NULL && p1->name != name)
+		{
+			p2 = p1;
+			p1 = p2->next;
+		}
+
+		//case 3.1 - no match
+		if(p1 == NULL) 
+		{
+			std::cout << name << " was not found in the Hash Table\n";
+		}
+		//case 3.2 - match is found
+		else
+		{
+			delPtr = p1;
+			p1 = p1->next;
+			p2->next = p1;
+
+			delete delPtr;
+			std::cout << name << " was removed from the Hash Table\n";
+		}
+	}	
+}
+
 int hash::Hash(std::string key) //hash::Hash means the Hash() function comes from the hash class
 { 
 	int hash = 0;

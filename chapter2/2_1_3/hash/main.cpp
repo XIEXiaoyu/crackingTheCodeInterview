@@ -25,16 +25,19 @@ int main(int argc, char** argv) {
 	Hashy.AddItem("Susan", "Water");
 	Hashy.AddItem("Joe", "Green Tea");
 
+	Hashy.PrintItemsInIndex(2);
+
 	while(name != "exit") 
 	{
-		std::cout << "search for ";
+		std::cout << "Remove ";
 		std::cin >> name;
 		if(name != "exit")
 		{
-			Hashy.FindDrink(name);
+			Hashy.RemoveItem(name);
 		}
 	}
 
+	Hashy.PrintItemsInIndex(2);
 
 	return 0;
 }
