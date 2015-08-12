@@ -27,6 +27,7 @@ public:
 	int NumberOfItemsInIndex(int index);
 	void PrintTable();
 	void PrintItemsInIndex(int index);
+	void FindDrink(std::string name);
 };
 
 #endif  /* HASH_H */

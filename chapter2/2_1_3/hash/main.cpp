@@ -9,6 +9,7 @@
 int main(int argc, char** argv) {
 
 	hash Hashy;
+	std::string name = "";
 
 
 	Hashy.AddItem("Paul", "Locha");
@@ -24,7 +25,16 @@ int main(int argc, char** argv) {
 	Hashy.AddItem("Susan", "Water");
 	Hashy.AddItem("Joe", "Green Tea");
 
-	Hashy.PrintItemsInIndex(8);
+	while(name != "exit") 
+	{
+		std::cout << "search for ";
+		std::cin >> name;
+		if(name != "exit")
+		{
+			Hashy.FindDrink(name);
+		}
+	}
+
 
 	return 0;
 }
