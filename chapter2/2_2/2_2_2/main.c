@@ -25,7 +25,18 @@ int main() {
 	}
 	printf("%d\n\n\n\n", item->num);
 
-	
+	Node p1, p2;
+	p1 = head;
+	p2 = FindNodeByIndex(head, 6);
+	while(p2 != NULL) 
+	{
+		p1 = p1->next;
+		p2 = p2->next;
+	}
 
+	int number = p1->num;
+
+	printf("the kth to last number is %d\n", number);
+	
 	return 0;
 }

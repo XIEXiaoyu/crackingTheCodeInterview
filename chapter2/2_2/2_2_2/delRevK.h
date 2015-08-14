@@ -15,3 +15,5 @@ Node listAppend(Node head, int number);
 Node listSearch(Node head, int number);
 
 Node nodeDel(Node head, Node node);
+
+Node FindNodeByIndex(Node head, int index);

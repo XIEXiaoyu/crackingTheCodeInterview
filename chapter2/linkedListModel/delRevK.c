@@ -4,12 +4,6 @@
 #include "delRevK.h"
 
 //第一大部分：怎样构造链表
-struct listNode {
-	int num;
-	struct listNode* next;
-};
-
-typedef struct listNode* Node;
 
 //1.生成一个node
 Node nodeCreate(int number) {   

@@ -4,12 +4,6 @@
 #include "delRevK.h"
 
 //第一大部分：怎样构造链表
-struct listNode {
-	int num;
-	struct listNode* next;
-};
-
-typedef struct listNode* Node;
 
 //1.生成一个node
 Node nodeCreate(int number) {   
@@ -92,6 +86,22 @@ Node nodeDel(Node head, Node node) {
 		return head;
 	}
 }
+
+//5. 根据位置找到结点
+Node FindNodeByIndex(Node head, int index)
+{
+	Node temp = head;
+	int count = 0;
+	while(temp != NULL && count != index)
+	{
+		count++;
+		temp = temp->next;
+	}
+
+	return temp;
+}
+
+
 
 
 
