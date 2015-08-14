@@ -42,17 +42,21 @@ Node listSearch(Node head, int number) {  //3.寻找一个node
 
 Node nodeDel(Node head, Node node) { //4.删除一个node
 	//1.如果head是空的
-	if(head == NULL) {
+	if(head == NULL) 
+	{
 		return NULL;
 	}
 
 	//2.删除了head
-	else if(node == head) {
-		//如果整个list只有一个head了 
-		if(node->next == NULL){ //而且此时这个结点是唯一的一个结点
+	else if(node == head)
+	{
+		if(node->next == NULL) //2.1 如果此时这个结点是唯一的一个结点
+		{ 
+			free(head);
 			head = NULL;
-		} else{
-		//如果整个list不只有head，还有其他的node	
+		} 
+		else  //2.2 如果整个list不只有head，还有其他的node	
+		{		
 			Node temp = head;
 			head = head->next;
 			free(temp);		
@@ -60,10 +64,12 @@ Node nodeDel(Node head, Node node) { //4.删除一个node
 		return head;
 	}
 
-	//3.删除了tail，而且tail不是唯一的一个结点
-	else if(node->next == NULL) {
+	//3.删除了tail，此时tail不是唯一的一个结点
+	else if(node->next == NULL) 
+	{
 		Node target = head->next;
-		while(target->next != node) {
+		while(target->next != node) 
+		{
 			target = target->next;
 		}
 		target->next = NULL;
@@ -72,9 +78,11 @@ Node nodeDel(Node head, Node node) { //4.删除一个node
 	}
 
 	//4.删除了不是head或者tail的结点
-	else {
+	else 
+	{
 		Node target = head;
-		while(target->next != node) {
+		while(target->next != node) 
+		{
 			target = target->next;
 		}
 		target->next = node->next;
@@ -113,9 +121,9 @@ int main() {
 	printf("1. head is %d\n\n\n\n", head->num);
 
 	printf("2. The list and the linked list is now:\n");
-	int array[] = {4, 3, 2, 7, 2, 6, 5, 9, 5, 6, 0, 6, 11, 6};
+	int array[] = {10, 3, 10, 7, 2, 11, 5, 9, 11, 6, 0, 6, 11, 6};
 
-	for(int i = 0; i < 14; i++) {
+	for(int i = 0; i < 9; i++) {
 		head = listAppend(head, array[i]);
 	}
 
@@ -126,14 +134,27 @@ int main() {
 	}
 	printf("%d\n\n\n\n", item->num);
 
-	printf("3. Now we are testing the delDups() function.\n");
-	head = delDups(head);
+	printf("3. Now we are testing the nodDel() function.\n");
+	Node target = listSearch(head, 1);
+	head = nodeDel(head, target);
+
+	printf("4.\n");
+
+	// printf("3. Now we are testing the delDups() function.\n");
+	// head = delDups(head);
 	item = head;
-	while(item->next != NULL) {
-		printf("%d ", item->num);
-		item = item->next;
+	if(head == NULL)
+	{
+		printf("The list is empty");
 	}
-	printf("%d\n\n\n\n", item->num);
+	else
+	{
+		while(item->next != NULL) {
+			printf("%d ", item->num);
+			item = item->next;
+		}
+		printf("%d\n\n\n\n", item->num);		
+	}
 
 	return 0;
 }
