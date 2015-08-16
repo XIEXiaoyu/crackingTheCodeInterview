@@ -87,19 +87,39 @@ Node nodeDel(Node head, Node node) {
 	}
 }
 
-//5. 根据位置找到结点
-Node FindNodeByIndex(Node head, int index)
+Nodum FindKthToLastNodeValueByIndex(Node head, int index)
 {
-	Node temp = head;
-	int count = 0;
-	while(temp != NULL && count != index)
-	{
-		count++;
-		temp = temp->next;
-	}
+	Nodum target = (Nodum)malloc(sizeof(Nodum) * 1);
+	target->node = NULL;
+	target->num = 1;
+	Node temp;
 
-	return temp;
+	if(head == NULL)
+	{
+		printf("4 node is %p\n\n", target->node);
+		return target;
+	}
+	else
+	{
+		target = FindKthToLastNodeValueByIndex(head->next, index);
+		if(target->num == index)
+		{
+			target->node = head;
+			target->num = target->num + 1;
+			return target;
+
+		}
+		else
+		{
+			target->num = target->num + 1;
+			return target;
+		}
+	}
 }
+
+
+
+
 
 
 

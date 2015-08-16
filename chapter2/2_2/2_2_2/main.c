@@ -9,10 +9,9 @@
 
 int main() {
 	Node head = nodeCreate(1);
-	printf("1. head is %d\n\n\n\n", head->num);
 
 	printf("2. The list and the linked list is now:\n");
-	int array[] = {10, 3, 10, 7, 2, 11, 5, 9, 11, 6, 0, 6, 11, 6};
+	int array[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
 	for(int i = 0; i < 9; i++) {
 		head = listAppend(head, array[i]);
@@ -21,22 +20,15 @@ int main() {
 	Node item = head;
 	while(item->next != NULL) {
 		printf("%d ", item->num);
+		printf("%p\n", item);
 		item = item->next;
 	}
-	printf("%d\n\n\n\n", item->num);
+	printf("%d ", item->num);
+	printf("%p\n\n", item);
 
-	Node p1, p2;
-	p1 = head;
-	p2 = FindNodeByIndex(head, 6);
-	while(p2 != NULL) 
-	{
-		p1 = p1->next;
-		p2 = p2->next;
-	}
-
-	int number = p1->num;
-
-	printf("the kth to last number is %d\n", number);
+	int index = 10;
+	Nodum target = FindKthToLastNodeValueByIndex(head,index);
+	printf("3. The %dth to last is %d\n", index, target->node->num);
 	
 	return 0;
 }
