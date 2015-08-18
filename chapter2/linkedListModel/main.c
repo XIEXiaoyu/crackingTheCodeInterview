@@ -6,9 +6,8 @@
 
 int main() {
 	Node head = nodeCreate(1);
-	printf("1. head is %d\n\n\n\n", head->num);
 
-	printf("2. The list and the linked list is now:\n");
+	printf("1. The list and the linked list is now:\n");
 	int array[] = {10, 3, 10, 7, 2, 11, 5, 9, 11, 6, 0, 6, 11, 6};
 
 	for(int i = 0; i < 9; i++) {
