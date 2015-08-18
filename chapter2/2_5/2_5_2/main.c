@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "delRevK.h"
+#include "2_5_2.h"
 
 
 int main() {
