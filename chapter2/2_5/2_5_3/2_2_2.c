@@ -36,8 +36,7 @@ Node listSearch(Node head, int number) {
 }
 
 //4.删除一个node
-Node nodeDel(Node head, Node node) 
-{ 
+Node nodeDel(Node head, Node node) { 
 	//1.如果head是空的
 	if(head == NULL) 
 	{
@@ -88,31 +87,41 @@ Node nodeDel(Node head, Node node)
 	}
 }
 
-//5.查看列表有多少个元素
-int FindQuantity(Node head)
+Nodum FindKthToLastNodeValueByIndex(Node head, int index)
 {
-	int count = 0;
-	Node temp = head;
-	while(temp != NULL)
+	Nodum target = (Nodum)malloc(sizeof(Nodum) * 1);
+	target->node = NULL;
+	target->num = 1;
+	Node temp;
+
+	if(head == NULL)
 	{
-		count++;
-		temp = temp->next;
+		printf("4 node is %p\n\n", target->node);
+		return target;
 	}
-	return count;
+	else
+	{
+		target = FindKthToLastNodeValueByIndex(head->next, index);
+		if(target->num == index)
+		{
+			target->node = head;
+			target->num = target->num + 1;
+			return target;
+
+		}
+		else
+		{
+			target->num = target->num + 1;
+			return target;
+		}
+	}
 }
 
-//5. 根据位置找到结点
-Node FindNodeByIndex(Node head, int index)
-{
-	Node temp = head;
-	int count = 0;
-	while(temp != NULL && count != index)
-	{
-		count++;
-		temp = temp->next;
-	}
 
-	return temp;
-}
+
+
+
+
+
 
 
