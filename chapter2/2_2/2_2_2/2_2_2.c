@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "delRevK.h"
+#include "2_2_2.h"
 
 //第一大部分：怎样构造链表
 
