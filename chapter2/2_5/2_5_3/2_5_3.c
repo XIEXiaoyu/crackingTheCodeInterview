@@ -19,7 +19,7 @@ int getLength(Node head)
 Node addTwolistsFromTailToHead(Node head1, Node head2)
 {
 	int length1 = 0, length2 = 0, lengthShort, lengthLong;
-	Node node1, node2, head, node, preNode;
+	Node node1, node2, node, preNode;
 	length1 = getLength(head1);
 	length2 = getLength(head2);
 	printf("3.1 lenght1 is %d and length2 is %d\n", length1, length2);
