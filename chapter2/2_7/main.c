@@ -1,15 +1,15 @@
 /*
-1.To solve the problem, we firstly use fast and slow pointers to seperate the list into two sublists,
-  then, we reverse the first list. Lastly, we compare the two strings.
-  1)the methof of fast-slow pointer to find the starting point of the second list need N computation.
-2.To find the starting point of the second list, we could use another method other than fast slow.
-  1)count how long the list is: need N computation
-  2)find the starting point of the second list: need N/2 computation.
-3.To reverse the first list, we have at least 5 methods.
-  reference: http://blog.csdn.net/feliciafay/article/details/6841115, has 4 methods.
-  			 http://blog.csdn.net/wuxinliulei/article/details/22730041, has 1 method.
+1.Firstly, use fast and slow pointers to seperate the list into two sublists,
+  Secondly, reverse the first list
+  Lastly, compare the two strings.
+  
+2.fast-slow pointer to seperate the list
 
-4.I am gonna us fast and slow and do 4 methods listed in http://blog.csdn.net/feliciafay/article/details/6841115
+3.at least 5 methods to reverse the first list:
+ http://blog.csdn.net/feliciafay/article/details/6841115
+ http://blog.csdn.net/wuxinliulei/article/details/22730041
+
+4.I use the recursive method to reverse the list
 */
 #include <stdio.h>
 #include <stdlib.h>
