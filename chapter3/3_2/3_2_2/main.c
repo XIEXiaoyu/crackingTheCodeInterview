@@ -3,29 +3,29 @@
 #include <stdlib.h>
 
 #include "stack.h"
-#include "recordMin.h"
 
 int main(int argc, char** argv)
 {
-	// int array[] = {7, 6, 5, 4, 3, 2, 1};
-	// Node node = LStackCreate(array[0]);
-	// printf("node->value is %d\n", node->value);
+	MStack mstack;
+	mstack = MstackInit();
 
+	int array[] = {7, 6, 5, 4, 3, 2, 1};
+	Node node = LStackCreate(mstack, array[0]);
+	printf("node->value is %d\n", node->value);
+	printf("mstack->value = %d\n\n", mstack->value);
+
+	node = push(node, array[1], &mstack);
+	node = push(node, array[2], &mstack);
+	node = push(node, array[3], &mstack);
+
+	int* data = (int*)malloc(sizeof(int));
+	int* mData = (int*)malloc(sizeof(int));
+
+	node = pop(node, data, &mstack, &mData);
+
+	int minimum;
+	getMin(mstack, &minimum);
+	printf("the minimum is %d\n", minimum);
 	
-	// for(int i = 1; i < 7; i++)
-	// {
-	// 	node = push(node, array[i]);
-	// 	printf("node->value is %d\n", node->value);
-	// }
-
-	// int* data = (int*)malloc(sizeof(int));
-	// for(int j = 0; j < 6; j++)
-	// {
-	// 	node = pop(node, data);
-	// 	printf("poped data is %d\n", *data);
-	// }
-
-	// destroyLStack(node);
-
 	return 0;
 }

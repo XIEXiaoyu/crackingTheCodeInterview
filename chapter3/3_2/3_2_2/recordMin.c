@@ -11,21 +11,22 @@ MStack MstackInit()
 	return mstack;
 }
 
-MStack MPush(MStack stack, int value)
+MStack MPush(MStack mstack, int value)
 {
 	//如果stack只是初始化了，但是没有值
-	if(stack->end == -1)
+	if(mstack->end == -1)
 	{
-		stack->end = 1; 
-		stack->value = value;
-		return stack;
+		mstack->end = 1; 
+		mstack->value = value;
+		mstack = MPush(mstack, value);
+		return mstack;
 	}
 	else
 	{
 		MStack new = (MStack)malloc(sizeof(struct MStack_));
 		new->value = value;
 		new->end = 1;
-		new->next = stack;
+		new->next = mstack;
 		return new;
 	}
 }
@@ -56,7 +57,3 @@ MStack MPop(MStack mstack, int* mData)
 	}
 	return mstack;	
 }
-
-
-
-

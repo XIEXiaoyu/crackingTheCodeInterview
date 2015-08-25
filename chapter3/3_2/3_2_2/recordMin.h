@@ -18,4 +18,3 @@ MStack MstackInit();
 MStack MPush(MStack stack, int value);
 //出栈
 MStack MPop(MStack stack, int* mData);
-
