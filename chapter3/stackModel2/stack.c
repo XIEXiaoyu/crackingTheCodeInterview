@@ -10,34 +10,34 @@ Stack stack_ini()
 	return stack;
 }
 
-Stack push(Stack stack, int value)
+Stack push_stack(Stack stack, int value)
 {
-	if(stack->top == 0)
+	//stack已经满了
+	if(stack->top >= stack->quota)
 	{
-		stack->top = 1;
-		stack->a[stack->top-1] = value;
+		printf("the stack is full.\n");
 	}
+	//stack没有满
 	else
 	{
-		stack->a[stack->top] = value;
 		stack->top++;
+		stack->a[stack->top-1] = value;
 	}
-
 	return stack;
 }
 
-/* ?这个函数返回的int, 不需要接吗？ */
-int pop(Stack stack, int* data)
+Stack pop(Stack stack, int* data)
 {
-	if(stack->top == 0)
+	//stack空了
+	if(stack->top == 0) 
 	{
-		printf("It's already a empty stack.\n");
+		printf("The stack is empty.\n");
+		return stack;
 	}
 	else
 	{
-
 		*data = stack->a[stack->top-1];
-		stack->top--;	
+		stack->top--;
+		return stack;
 	}
-	return 1;	
 }

@@ -12,6 +12,6 @@ typedef struct Stack_* Stack;
 
 Stack stack_ini();
 
-Stack push(Stack stack, int value);
+Stack push_stack(Stack stack, int value)
 
-int pop(Stack stack, int* data);
+Stack pop(Stack stack, int* data)
