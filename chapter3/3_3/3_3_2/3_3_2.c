@@ -123,5 +123,55 @@ Sostacks selectStack(Sostacks presentStack, int direction, int index)
 		return selectedstack;
 	}
 }
-// Sostacks popAt(Sostacks sostacks, int* data)
+
+Sostacks leftShiftOneStack(Sostacks stack)
+{
+	Sostacks nextStack = stack->next;
+	if(nextStack == NULL)
+	{
+		for(int i = 0; i < stack->top-1; i++)
+		{
+			stack->a[i] = stack->a[i+1];
+		}
+		stack->top--;
+	}
+	else
+	{
+		stack->a[stack->top-1] = nextStack->a[0];
+
+		for(int i = 0; i < nextStack->top-1; i++)
+		{
+			nextStack->a[i] = nextStack->a[i+1];
+		}
+	}
+
+	return stack;
+}
+
+Sostacks leftShiftSetOfStacks(Sostacks presentStack)
+{
+	Sostacks item = presentStack;
+	while(item != NULL)
+	{
+		item = leftShiftOneStack(item);
+		item = item->next;
+	}
+
+	return presentStack;
+}
+
+Sostacks popAt(Sostacks presentStack, int* Adata)
+{
+	//如果当前stack是空的
+	if(presentStack->pre == NULL && presentStack->top == 0)
+	{
+		printf("The setOfStacks is empty.\n");
+		return NULL;
+	}
+
+	*Adata = presentStack->a[presentStack->top-1];
+	//进行左移动
+	presentStack = leftShiftSetOfStacks(presentStack);
+	return presentStack;
+}
 

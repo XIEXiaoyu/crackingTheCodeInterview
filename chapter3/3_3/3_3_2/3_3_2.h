@@ -24,5 +24,14 @@ Sostacks pop(Sostacks sostacks, int* data);
 //找到指定的stack
 Sostacks selectStack(Sostacks presentStack, int direction, int index);
 
+//左移动函数-一个stack
+Sostacks leftShiftOneStack(Sostacks stack);
+
+//左移动函数－整套stack
+Sostacks leftShiftSetOfStacks(Sostacks presentStack);
+
+//pop指定的stack
+Sostacks popAt(Sostacks presentStack, int* Adata);
+
 
 

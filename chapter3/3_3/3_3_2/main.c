@@ -13,8 +13,12 @@ int main(int argc, char** argv)
 		sostacks = push(sostacks, i);
 	}
 	
-	sostacks = selectStack(sostacks, -1, 1);
+	sostacks = selectStack(sostacks, -1, 2);
+	int* Adata = (int*)malloc(sizeof(int));
 
+	sostacks = popAt(sostacks, Adata);
+	printf("%d\n", *Adata);
+	printf("%d\n", sostacks->a[9]);
 
 	return 0;
 }
