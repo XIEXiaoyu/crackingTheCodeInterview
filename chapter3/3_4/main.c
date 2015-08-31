@@ -15,10 +15,13 @@ int main(int argc, char** argv)
 	Stack b = stack_ini(N);
 	Stack c = stack_ini(N);
 
+	printf("Hanoi: %p, %p, %p\n", a, b, c);
+
 	//将第一个stack里面存入5个数字，从大到小依次给进去。
 	int array[] = {5, 4, 3, 2, 1};
 	for(int i = 0; i < N; i++)
 	{
+		printf("Pushing (%d)...\n", array[i]);
 		push_stack(a, array[i]);
 	}
 

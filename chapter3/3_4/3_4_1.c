@@ -5,7 +5,7 @@
 
 Stack stack_ini(int quotaValue)
 {
-	Stack stack = (Stack)malloc(sizeof(Stack));
+	Stack stack = (Stack)malloc(sizeof(struct Stack_));
 	stack->top = 0;
 	stack->quota = quotaValue;
 	return stack;
@@ -45,6 +45,9 @@ void move(Stack a, Stack c)
 {
 	int * data = (int*)malloc(sizeof(int));
 	pop(a, data);
+
+	printf("Move %d from %p to %p\n", *data, a, c);
+
 	push_stack(c, *data);
 	return;
 }
@@ -57,7 +60,6 @@ void hanoi(	Stack a,
 	if(disks == 1)
 	{
 		move(a,c);	
-		printf("%c to %c")
 		return;
 	}
 
