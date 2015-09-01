@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#include "stack.h"
+#ifndef _LINKQUEUE_H_  //if not define
+#define _LINKQUEUE_H_
 
 struct Node_ {
 	int id;
@@ -9,16 +11,16 @@ struct Node_ {
 	struct Node_ * next;
 };
 
-typedef Node_* Node;
+typedef struct Node_* Node;
 
 struct Queue_ {
 	Node head;
-	Node Rear;
+	Node rear;
 	int len;
 	bool is_inited;
 };
 
-typedef Queue_ * Queue;
+typedef struct Queue_ * Queue;
 
 //create a new node
 Node node_new(int id, char* name);
@@ -46,3 +48,5 @@ void clear_queue(Queue queue);
 
 //destroy the queue
 void freeQueue(Queue queue);
+
+#endif

@@ -3,8 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#ifdef _LINKQUEUE_H_
-#define _LINKQUEUE_H_
+#include "stack.h"
 
 Node node_new(int id, char* name)
 {
@@ -12,7 +11,7 @@ Node node_new(int id, char* name)
 	if(node == NULL)
 	{
 		printf("error: fail to assign memory to node.\n");
-		exit(1);
+		return NULL;
 	}
 	node->id = id;
 	strncpy(node->name, name+0, 10); 
@@ -31,18 +30,19 @@ Queue queue_new(void)
 	if(queue == NULL)
 	{
 		printf("error: fail to assign memory to node.\n");
-		exit(1);
+		return NULL;
 	}
 	Node head = node_new(-1, "head");
+	queue->head = head;
 	queue->rear = queue->head;
 	queue->len = 0;
 	queue->is_inited = true;
-	return Queue; 
+	return queue; 
 }
 
 bool queue_is_empty(Queue queue)
 {
-	if(queue->is_inited != TRUE)
+	if(queue->is_inited != true)
 	{
 		printf("The queue is not inited yet.\n");
 		return false;
@@ -60,7 +60,7 @@ void enqueue(Queue queue, Node node)
 	if(queue->is_inited != true)
 	{
 		printf("the queue is not inited yet.\n");
-		exit(1);
+		return;
 	}
 
 	queue->rear->next = node;
@@ -73,20 +73,20 @@ void enqueue(Queue queue, Node node)
 
 bool dequeue(Queue queue, Node* node)
 {
-	if(queue->is_inited != TURE)
+	if(queue->is_inited != true)
 	{
 		printf("The queue is not inited yet.\n");
-		exit(1);
+		return false;
 	}
 
-	if(queue_is_empty(queue) == TRUE)
+	if(queue_is_empty(queue) == true)
 	{
 		printf("the queue is an empty queue.\n");
 		return false;
 	}
 	
 	*node = queue->head->next;
-	queue->head->next = *node->next;
+	queue->head->next = (*node)->next;
 	queue->len--;
 
 	if(queue->rear == *node)
@@ -103,10 +103,10 @@ void printQueue(Queue queue)
 	if(queue->is_inited == false)
 	{
 		printf("the queue is not inited yet.\n");
-		exit(1);
+		return;
 	}
 
-	if(queue_is_empty(queue) == TRUE)
+	if(queue_is_empty(queue) == true)
 	{
 		printf("the queue is empty.\n");
 		return;
@@ -122,15 +122,15 @@ void printQueue(Queue queue)
 
 void clear_queue(Queue queue)
 {
-	if(queue->is_inited != TRUE)
+	if(queue->is_inited != true)
 	{
 		printf("the queue is not inited yet.\n");
-		exit(1);
+		return;
 	}
 
 	if(queue->head == queue->rear)
 	{
-		free(quque->head);
+		free(queue->head);
 	}
 
 	Node node = queue->head->next;
@@ -149,11 +149,9 @@ void clear_queue(Queue queue)
 
 void freeQueue(Queue queue)
 {
-	clear_queue(Queue queue);
+	clear_queue(queue);
 	free(queue->head);
 	queue->head = NULL;
 	free(queue);
 	queue = NULL;
 }
-
-#endif
