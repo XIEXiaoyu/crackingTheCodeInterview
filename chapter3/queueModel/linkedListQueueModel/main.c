@@ -21,28 +21,19 @@ int main()
 	printQueue(queue);
 
 	int i = 0;
-	Node node = (Node)malloc(sizeof(struct Node_));
+	Node node;
+	printf("5. node is %p\n", node);
 	int len = queue->len;
 	for(i = 0; i < len; i++)
 	{
 		printf("2. i is %d\n", i);
 		dequeue(queue, &node);
-		printf("2. the out node is \n");
 		node_print(node);
 		printf("2. %p\n", node);
-		printf("2. \n");
+		printf("\n");
 		free(node);
 	}
 	printf("\n");
-
-	printf("Now clear the queue\n");
-	clear_queue(queue);
-	freeQueue(queue);
-
-	printQueue(queue);
-
-
-
 
 	return 0;
 }
