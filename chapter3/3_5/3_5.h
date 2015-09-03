@@ -2,8 +2,20 @@
 
 #include "stack.h"
 
-//enque
-bool enque(Node stack1, Node stack2, int value)
+#ifndef _TWOSTACKINTOQUEUE
+#define _TWOSTACKINTOQUEUE
+
+struct dequeueOutput
 {
-	Node push(Node LSHead, int value)
-}
+	Node tail1;
+	Node tail2;
+	int popedValue;
+};
+
+//enque
+Node enque(Node tail1, int value);
+
+//deuqe
+struct dequeueOutput dequeue(Node tail1, Node tail2);
+
+#endif

@@ -3,7 +3,7 @@
 
 #include "stack.h"
 
-Node LStackCreate(int value)
+Node LSNodeCreate(int value) 
 {
 	Node node = (Node)malloc(sizeof(Node)); //?为什么是sizeof(Node), 不是sizeof(LSNode)
 	node->next = NULL;
@@ -11,18 +11,18 @@ Node LStackCreate(int value)
 	return node;
 }
 
-Node push(Node LSHead, int value)
-{
-	Node node = (Node)malloc(sizeof(Node));
-	node->value = value;
-	node->next = LSHead;
-	return node;
+Node push(Node tail, int value)
+{	
+	Node new = LSNodeCreate(value);
+	new->next = tail;
+
+	return new;
 }
 
-Node pop(Node LSHead, int* data)
+Node pop(Node tail, int* data)
 {
 	//如果是空stack
-	if(LSHead == NULL)
+	if(tail == NULL)
 	{
 		printf("It is a empty stack already.\n");
 		return NULL;
@@ -31,32 +31,32 @@ Node pop(Node LSHead, int* data)
 	//如果不是空的
 	else
 	{
-		*data = LSHead->value;
+		*data = tail->value;
 		//如果是只有一个元素的stack
-		if(LSHead->next == NULL)
+		if(tail->next == NULL)
 		{	
-			free(LSHead);
+			free(tail);
 			return NULL;
 		}
 		//如果是一个普通的stack
 		else
 		{
-			Node temp = LSHead;
-			LSHead = LSHead->next;
+			Node temp = tail;
+			tail = tail->next;
 			temp->next = NULL;
 			free(temp);
-			return LSHead;
+			return tail;
 		}
 	}
 }
 
-void destroyLStack(Node LSHead)
+void destroyLStack(Node tail)
 {
-	while(LSHead != NULL)
+	while(tail != NULL)
 	{
-		Node temp = LSHead;
+		Node temp = tail;
 		int data = temp->value;
-		LSHead = LSHead->next;
+		tail = tail->next;
 		free(temp);
 		printf("%d is freed.\n", data);
 	}
