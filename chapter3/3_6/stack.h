@@ -20,7 +20,8 @@ struct Stack_
 
 typedef struct Stack_ * Stack;
 
-void stack_init(Stack stack);
+//initialise an empty stack. 
+Stack stack_init();
 
 /*
 	1. if returns false, means the stack is not empty

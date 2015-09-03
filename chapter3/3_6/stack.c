@@ -4,9 +4,11 @@
 
 #include "stack.h"
 
-void stack_init(Stack stack)
+Stack stack_init()
 {
+	Stack stack = (Stack)malloc(sizeof(struct Stack_));
 	stack->top = NULL;
+	return stack;
 }
 
 bool isEmpty(Stack stack)
