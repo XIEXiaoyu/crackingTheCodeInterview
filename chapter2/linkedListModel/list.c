@@ -1,33 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#include "delRevK.h"
+#include "list.h"
 
-//第一大部分：怎样构造链表
+LinkedList init_list()
+{
+	LinkedList list = (LinkedList)malloc(sizeof(struct LinkedList));
+	list->head = NULL;
+	return list;
+}
 
-//1.生成一个node
-Node nodeCreate(int number) {   
+Node nodeCreate(int number) 
+{   
 	Node node = malloc(sizeof(struct listNode));
 	node->num = number;
 	node->next = NULL;
 	return node;	
 } 
 
-//2.向list的尾巴增加一个node
-Node listAppend(Node head, int number) {  
+void insert_node(LinkedList* list, int number) 
+{  
 	Node node = nodeCreate(number);
-	Node item = head;
-	while(item->next != NULL) {
-		item = item->next;
-	}
-	item->next = node;
-	return head;
+	node->next = (*list)->head;
+	(*list)->head = node;
 }
 
-//3.寻找一个node
-Node listSearch(Node head, int number) {  
+Node listSearch(LinkedList list, int number) 
+{  
 	Node target;
-	Node item = head;
+	Node item = list->head;
 	while(item->num != number) {
 		item = item->next;
 	}
@@ -35,57 +37,55 @@ Node listSearch(Node head, int number) {
 	return target;
 }
 
-//4.删除一个node
-Node nodeDel(Node head, Node node) { 
-	//1.如果head是空的
-	if(head == NULL) 
+bool nodeDel(LinkedList* list, Node node) 
+{ 
+	// 如果head是空的，就不能做删除node的操作
+	if((*list)->head == NULL) 
 	{
-		return NULL;
+		return false;
 	}
 
-	//2.删除了head
-	else if(node == head)
+	// 不能删除无意的的node
+	if(node == NULL)
 	{
-		if(node->next == NULL) //2.1 如果此时这个结点是唯一的一个结点
+		return false;
+	}
+
+	// 删除了head
+	else if(node == (*list)->head)
+	{
+		if(node->next == NULL) // 如果此时这个结点是唯一的一个结点
 		{ 
-			free(head);
-			head = NULL;
+			Node temp = node;
+			(*list)->head = NULL;	
+			free(temp);
 		} 
-		else  //2.2 如果整个list不只有head，还有其他的node	
+		else  // 如果整个list不只有head，还有其他的node	
 		{		
-			Node temp = head;
-			head = head->next;
+			Node temp = node;
+			(*list)->head = node->next;
 			free(temp);		
 		}
-		return head;
+		return true;
 	}
 
-	//3.删除了tail，此时tail不是唯一的一个结点
-	else if(node->next == NULL) 
+	// 删除了一个不是head的普通结点
+	else
 	{
-		Node target = head->next;
-		while(target->next != node) 
+		Node beforeTarget = (*list)->head;
+		while(beforeTarget->next != node && beforeTarget != NULL)
 		{
-			target = target->next;
+			beforeTarget = beforeTarget->next;
 		}
-		target->next = NULL;
-		free(node);
-		return head;
-	}
-
-	//4.删除了不是head或者tail的结点
-	else 
-	{
-		Node target = head;
-		while(target->next != node) 
+		if(beforeTarget == NULL)
 		{
-			target = target->next;
+			return false; // the node is not in the list
 		}
-		target->next = node->next;
-		free(node);
-		return head;
+		else
+		{
+			beforeTarget->next = beforeTarget->next->next;
+			free(node);
+			return true;
+		}
 	}
 }
-
-
-

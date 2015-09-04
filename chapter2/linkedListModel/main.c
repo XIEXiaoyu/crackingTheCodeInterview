@@ -1,25 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#include "delRevK.h"
+#include "list.h"
 
 
 int main() {
-	Node head = nodeCreate(1);
 
-	printf("1. The list and the linked list is now:\n");
-	int array[] = {10, 3, 10, 7, 2, 11, 5, 9, 11, 6, 0, 6, 11, 6};
+	LinkedList list = init_list();
 
-	for(int i = 0; i < 9; i++) {
-		head = listAppend(head, array[i]);
+	insert_node(&list, 1);
+	printf("%p\n", list->head);
+	insert_node(&list, 2);
+	printf("%p\n", list->head);
+	insert_node(&list, 3);
+	printf("%p\n", list->head);
+
+	Node target = listSearch(list, 3);
+	printf("%p\n", target);
+
+	bool isDelSuc = nodeDel(&list, target);
+	if(isDelSuc == true)
+	{
+		printf("%d\n", list->head->num);
 	}
-
-	Node item = head;
-	while(item->next != NULL) {
-		printf("%d ", item->num);
-		item = item->next;
-	}
-	printf("%d\n\n\n\n", item->num);
 
 	return 0;
 }
