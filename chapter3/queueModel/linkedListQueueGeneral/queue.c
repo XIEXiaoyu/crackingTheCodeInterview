@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 
+#include "4_4_1.h"
 #include "queue.h"
 
 Node node_new(ElemTyp data)

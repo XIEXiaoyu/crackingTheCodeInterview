@@ -7,7 +7,9 @@
 #ifndef _LINKQUEUE_GENERAL_H_  //if not define
 #define _LINKQUEUE_GENERAL_H_
 
-typedef int ElemTyp;
+#include "4_4_1.h"
+
+typedef  ListsQueueNode ElemTyp;
 
 struct Node_ {
 	ElemTyp data;
