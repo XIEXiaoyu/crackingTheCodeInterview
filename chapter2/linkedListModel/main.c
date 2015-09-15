@@ -9,21 +9,39 @@ int main() {
 
 	LinkedList list = init_list();
 
-	insert_node(&list, 1);
-	printf("%p\n", list->head);
-	insert_node(&list, 2);
-	printf("%p\n", list->head);
-	insert_node(&list, 3);
-	printf("%p\n", list->head);
+	insert_node_rear(&list, 1);
+	printf("%p\n", list->rear);
+	insert_node_rear(&list, 2);
+	printf("%p\n", list->rear);
+	insert_node_rear(&list, 3);
+	printf("%p\n", list->rear);
+	insert_node_rear(&list, 4);
+	printf("%p\n", list->rear);
+	insert_node_rear(&list, 5);
+	printf("%p\n", list->rear);
+	insert_node_rear(&list, 6);
+	printf("%p\n", list->rear);
 
-	Node target = listSearch(list, 3);
+
+	Node target = listSearch(list, 2);
 	printf("%p\n", target);
 
-	bool isDelSuc = nodeDel(&list, target);
-	if(isDelSuc == true)
+	bool isDel = nodeDel(&list, target);
+	if(isDel == true)
 	{
-		printf("%d\n", list->head->num);
+		Node temp = list->head;
+		while(temp != NULL)
+		{
+			printf("%p\n", temp);
+			temp = temp->next;
+		}
+	} 
+	else
+	{
+		printf("del error.\n");
 	}
+
+
 
 	return 0;
 }

@@ -8,29 +8,52 @@ LinkedList init_list()
 {
 	LinkedList list = (LinkedList)malloc(sizeof(struct LinkedList));
 	list->head = NULL;
+	list->rear = NULL;
 	return list;
 }
 
-Node nodeCreate(int number) 
+Node nodeCreate(ElemType data) 
 {   
 	Node node = malloc(sizeof(struct listNode));
-	node->num = number;
+	node->data = data;
 	node->next = NULL;
 	return node;	
 } 
 
-void insert_node(LinkedList* list, int number) 
+void insert_node_head(LinkedList* list, ElemType data) 
 {  
-	Node node = nodeCreate(number);
-	node->next = (*list)->head;
-	(*list)->head = node;
+	Node node = nodeCreate(data);
+	if((*list)->head == NULL)
+	{
+		(*list)->head = node;
+	}
+	else
+	{
+		node->next = (*list)->head;
+		(*list)->head = node;
+	}
 }
 
-Node listSearch(LinkedList list, int number) 
+void insert_node_rear(LinkedList* list, ElemType data)
+{
+	Node node = nodeCreate(data);
+	if((*list)->head == NULL)
+	{
+		(*list)->head = (*list)->rear = node;
+	}
+	else
+	{
+		(*list)->rear->next = node;
+		(*list)->rear = node;
+	}
+}
+
+
+Node listSearch(LinkedList list, ElemType data) 
 {  
 	Node target;
 	Node item = list->head;
-	while(item->num != number) {
+	while(item->data != data) {
 		item = item->next;
 	}
 	target = item;

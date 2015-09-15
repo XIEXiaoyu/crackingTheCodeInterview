@@ -5,8 +5,9 @@
 #ifndef _LINKED_LIST_MODEL_
 #define _LINKED_LIST_MODEL_
 
+typedef int ElemType;
 struct listNode {
-	int num;
+	ElemType data;
 	struct listNode* next;
 };
 
@@ -15,6 +16,7 @@ typedef struct listNode* Node;
 struct LinkedList
 {
 	Node head;
+	Node rear;
 };
 
 typedef struct LinkedList* LinkedList;
@@ -23,13 +25,16 @@ typedef struct LinkedList* LinkedList;
 LinkedList init_list();
 
 //生成一个node
-Node nodeCreate(int number);
+Node nodeCreate(ElemType data);
 
 //头插入法建立单链表
-void insert_node(LinkedList* list, int number);
+void insert_node_head(LinkedList* list, ElemType data);
+
+//尾插入法建立单链表
+void insert_node_rear(LinkedList* list, ElemType data);
 
 //寻找一个node
-Node listSearch(LinkedList list, int number);
+Node listSearch(LinkedList list, ElemType data);
 
 /*
 	删除一个node
