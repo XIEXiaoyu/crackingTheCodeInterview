@@ -5,7 +5,7 @@
 
 #include "queue.h"
 
-Node node_new(int id)
+Node node_new(ElemTyp id)
 {
 	Node node = (Node)malloc(sizeof(struct Node_));
 	if(node == NULL)

@@ -7,10 +7,10 @@
 #ifndef _LINKQUEUE_GENERAL_H_  //if not define
 #define _LINKQUEUE_GENERAL_H_
 
-typedef int ElemTyp1;
+typedef int ElemTyp;
 
 struct Node_ {
-	int id;
+	ElemTyp id;
 	struct Node_ * next;
 };
 
@@ -26,7 +26,7 @@ struct Queue_ {
 typedef struct Queue_ * Queue;
 
 //create a new node
-Node node_new(int id);
+Node node_new(ElemTyp id);
 
 //print the information of a node
 void node_print(Node node);
