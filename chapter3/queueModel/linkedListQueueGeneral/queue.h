@@ -7,31 +7,29 @@
 #ifndef _LINKQUEUE_GENERAL_H_  //if not define
 #define _LINKQUEUE_GENERAL_H_
 
-#include "4_4_1.h"
+typedef  int ElemTyp;
 
-typedef  ListsQueueNode ElemTyp;
-
-struct Node_ {
+struct LLQNode {
 	ElemTyp data;
-	struct Node_ * next;
+	struct LLQNode * next;
 };
 
-typedef struct Node_* Node;
+typedef struct LLQNode* LLQNode;
 
-struct Queue_ {
-	Node head;
-	Node rear;
+struct Queue {
+	LLQNode head;
+	LLQNode rear;
 	int len;
 	bool is_inited;
 };
 
-typedef struct Queue_ * Queue;
+typedef struct Queue* Queue;
 
 //create a new node
-Node node_new(ElemTyp data);
+LLQNode node_new(ElemTyp data);
 
 //print the information of a node
-void node_print(Node node);
+void node_print(LLQNode node);
 
 //create a queue
 Queue queue_new(void);
@@ -40,10 +38,10 @@ Queue queue_new(void);
 bool queue_is_empty(Queue queue);
 
 //add an element into the queue
-void enqueue(Queue queue, Node node);
+void enqueue(Queue queue, LLQNode node);
 
 //remove an element from a queue and get the element
-bool dequeue(Queue queue, Node* node);
+bool dequeue(Queue queue, LLQNode* node);
 
 //traverse the queue to print elements
 void printQueue(Queue queue);

@@ -21,7 +21,7 @@ int main()
 	printQueue(queue);
 
 	int i = 0;
-	Node node;
+	LLQNode node;
 	printf("5. node is %p\n", node);
 	int len = queue->len;
 	for(i = 0; i < len; i++)

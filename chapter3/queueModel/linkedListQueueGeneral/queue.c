@@ -3,12 +3,11 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "4_4_1.h"
 #include "queue.h"
 
-Node node_new(ElemTyp data)
+LLQNode node_new(ElemTyp data)
 {
-	Node node = (Node)malloc(sizeof(struct Node_));
+	LLQNode node = (LLQNode)malloc(sizeof(struct LLQNode));
 	if(node == NULL)
 	{
 		printf("error: fail to assign memory to node.\n");
@@ -19,20 +18,20 @@ Node node_new(ElemTyp data)
 	return node;
 }
 
-void node_print(Node node)
+void node_print(LLQNode node)
 {
 	printf("data is %d\n", node->data);
 }
 
 Queue queue_new(void)
 {
-	Queue queue = (Queue)malloc(sizeof(struct Queue_));
+	Queue queue = (Queue)malloc(sizeof(struct Queue));
 	if(queue == NULL)
 	{
 		printf("error: fail to assign memory to node.\n");
 		return NULL;
 	}
-	Node head = node_new(-1);
+	LLQNode head = node_new(-1);
 	queue->head = head;
 	queue->rear = queue->head;
 	queue->len = 0;
@@ -55,7 +54,7 @@ bool queue_is_empty(Queue queue)
 	return false;
 }
 
-void enqueue(Queue queue, Node node)
+void enqueue(Queue queue, LLQNode node)
 {
 	if(queue->is_inited != true)
 	{
@@ -71,7 +70,7 @@ void enqueue(Queue queue, Node node)
 	return;
 }
 
-bool dequeue(Queue queue, Node* node)
+bool dequeue(Queue queue, LLQNode* node)
 {
 	if(queue->is_inited != true)
 	{
@@ -112,7 +111,7 @@ void printQueue(Queue queue)
 		return;
 	}
 
-	Node node = queue->head->next;
+	LLQNode node = queue->head->next;
 	while(node != NULL)
 	{
 		node_print(node);
@@ -133,8 +132,8 @@ void clear_queue(Queue queue)
 		free(queue->head);
 	}
 
-	Node node = queue->head->next;
-	Node temp;
+	LLQNode node = queue->head->next;
+	LLQNode temp;
 	while(node != NULL)
 	{
 		temp = node;
