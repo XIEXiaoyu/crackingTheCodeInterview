@@ -5,7 +5,7 @@
 
 #include "queue.h"
 
-Node node_new(ElemTyp id)
+Node node_new(ElemTyp data)
 {
 	Node node = (Node)malloc(sizeof(struct Node_));
 	if(node == NULL)
@@ -13,14 +13,14 @@ Node node_new(ElemTyp id)
 		printf("error: fail to assign memory to node.\n");
 		return NULL;
 	}
-	node->id = id;
+	node->data = data;
 	node->next = NULL;
 	return node;
 }
 
 void node_print(Node node)
 {
-	printf("id is %d\n", node->id);
+	printf("data is %d\n", node->data);
 }
 
 Queue queue_new(void)

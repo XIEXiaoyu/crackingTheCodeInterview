@@ -10,7 +10,7 @@
 typedef int ElemTyp;
 
 struct Node_ {
-	ElemTyp id;
+	ElemTyp data;
 	struct Node_ * next;
 };
 
@@ -26,7 +26,7 @@ struct Queue_ {
 typedef struct Queue_ * Queue;
 
 //create a new node
-Node node_new(ElemTyp id);
+Node node_new(ElemTyp data);
 
 //print the information of a node
 void node_print(Node node);
