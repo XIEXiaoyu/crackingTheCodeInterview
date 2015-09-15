@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "stack.h"
+#include "queue.h"
 
 Node node_new(int id, char* name)
 {
