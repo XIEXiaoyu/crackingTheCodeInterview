@@ -1,21 +1,35 @@
 /*
-	思路：	1. 	D,K,F, next is the father
-			2.	Z,M,L, next is NULL
-			3.  E,H,C, next is the right child
-			4.  A,B, next is the most left node of his right child
-	分析：	时间复杂度是
-			空间复杂度也是
+	思路：	Using LDR, if I choose a node as current, then its next should be
+			its left most descendant of his right subtree. For example, for 
+			node A, B, C, E, G, H and J the next node is the right child F, K, 
+			G, I, J, L and M seperately.
 
+			But what if the current node has no right child, for example, nodes
+			D, F, I, K, L, M, N and O. We need to find its father. For node D, F,
+			K, N and O, we could find its father easily and they are B, C, H, D
+			and N. But for I and L, we need to find the node the that has been
+			traversed, that is A and E. 
 
-           A
-         /	 \
-    	B	  C
-	   /\	 / \
-	  D  E  F   G
-	 	/ \      \
-	   H   I      J
-   	  / \          \
-  	 K   L          M
+			For node M, it is special, as there is no next node of it.
+		
+		           A     					    
+		         /	 \
+		    	B	  C
+			   /\	 / \
+			  D  E  F   G
+			 /	/ \      \
+			N  H   I      J
+		   /  / \          \
+		  O	 K   L          M
+		           10                              
+		         /	 \
+		    	4	  12
+			   /\	 / \
+			  3  8  11  13
+			 /	/ \      \
+			2  6   9      14
+		   /  / \          \
+		  1	 5   7          15		  
 */
 
 #include <stdio.h>
@@ -29,24 +43,25 @@ int main(int agrc, char* argv[])
 {
 	BstNode root = createBst();
 
-	BstNode inputBstNode = root; //A 8
-	inputBstNode = root->left; //B 2
-	inputBstNode = root->right; //C 10;
-	inputBstNode = root->left->left; //D 1
-	inputBstNode = root->left->right; //E 6
-	inputBstNode = root->right->left; //F 9
-	inputBstNode = root->right->right; //G 11
-	inputBstNode = root->left->right->left; //H 4
-	inputBstNode = root->left->right->right; //I 7  NULL
-	inputBstNode = root->right->right->right; //J 12
-	inputBstNode = root->left->right->left->left; //K 3
-	inputBstNode = root->left->right->left->right; //L 5 NULL
-	inputBstNode = root->right->right->right->right; //M 13 NULL
+	InorderTraverseBst(root);
+	printf("\n");
 
+	BstNode inputBstNode = root; //A 10
+	inputBstNode = root->left; //B 4
+	inputBstNode = root->right; //C 12;
+	inputBstNode = root->left->left; //D 3
+	inputBstNode = root->left->right; //E 8
+	inputBstNode = root->right->left; //F 11
+	inputBstNode = root->right->right; //G 13
+	inputBstNode = root->left->right->left; //H 6
+	inputBstNode = root->left->right->right; //I 9  
+	inputBstNode = root->right->right->right; //J 14
+	inputBstNode = root->left->right->left->left; //K 5
+	inputBstNode = root->left->right->left->right; //L 7
+	inputBstNode = root->right->right->right->right; //M 15 NULL
+	inputBstNode = root->left->left->left; //N new 2
+	inputBstNode = root->left->left->left->left; //O new 1
 
 	BstNode nextBstNode = findNextBstNode(root, inputBstNode);
-
-	printf("%d\n", nextBstNode);
-
-
+	printf("%d\n", nextBstNode->data);
 }

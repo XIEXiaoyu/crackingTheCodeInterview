@@ -15,20 +15,22 @@ BstNode createBstNode(int data)
 //create a bst
 BstNode createBst()
 {
-	BstNode A = createBstNode(8);
-	BstNode B = createBstNode(2);
-	BstNode C = createBstNode(10);
-	BstNode D = createBstNode(1);
-	BstNode E = createBstNode(6);
-	BstNode F = createBstNode(9);
-	BstNode G = createBstNode(11);
-	BstNode H = createBstNode(4);
-	BstNode I = createBstNode(7);
-	BstNode J = createBstNode(12);
-	BstNode K = createBstNode(3);
-	BstNode L = createBstNode(5);
-	BstNode M = createBstNode(13);
-
+	BstNode A = createBstNode(10);
+	BstNode B = createBstNode(4);
+	BstNode C = createBstNode(12);
+	BstNode D = createBstNode(3);
+	BstNode E = createBstNode(8);
+	BstNode F = createBstNode(11);
+	BstNode G = createBstNode(13);
+	BstNode N = createBstNode(2); //new element
+	BstNode H = createBstNode(6);
+	BstNode I = createBstNode(9);
+	BstNode J = createBstNode(14);
+	BstNode O = createBstNode(1); //new element
+	BstNode K = createBstNode(5);
+	BstNode L = createBstNode(7);
+	BstNode M = createBstNode(15);
+	
 	A->left  = B;
 	A->right = C;
 
@@ -48,6 +50,10 @@ BstNode createBst()
 	
 	J->right = M;
 
+	D->left = N; //new element
+
+	N->left = O; //new element
+
 	B->parent = A;
 	C->parent = A;
 	D->parent = B;
@@ -60,6 +66,8 @@ BstNode createBst()
 	K->parent = H;
 	L->parent = H;
 	M->parent = J;
+	N->parent = D; //new element
+	O->parent = N; //new element
 
 	return A;
 }
@@ -82,3 +90,34 @@ void InorderTraverseBst(BstNode root)
 	
 	return;
 }
+
+BstNode getLeftMostNode(BstNode bstNode)
+{
+	BstNode temp = bstNode->right;
+
+	while(temp->left != NULL)
+	{
+		temp = temp->left;
+	}
+
+	return temp;
+}
+
+BstNode getAncestorNonTraversed(BstNode root, BstNode bstNode)
+{
+	BstNode temp = bstNode->parent;
+
+	while(temp->parent->right == temp && temp->parent != root)
+	{
+		temp = temp->parent;
+	}
+
+	if(temp->parent == root)
+	{
+		return NULL;
+	}
+	return temp->parent;
+}
+
+
+

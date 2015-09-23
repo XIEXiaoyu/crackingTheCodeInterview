@@ -34,5 +34,19 @@ BstNode createBst();
 */
 void InorderTraverseBst(BstNode root);
 
+/* 	Given a node, find its most left desendant of its right subtree
+	@argu	BstNode node
+	@retn 	BstNode leftMostNode
+*/
+BstNode getLeftMostNode(BstNode bstNode);
+
+/* 	Given a node, find the ancestor that has been traversed in LDR
+	@argu 	BstNode node
+	@argu	BstNode root
+	@retn	BstNode ancestorNonTraversed
+*/
+BstNode getAncestorNonTraversed(BstNode root, BstNode bstNode);
+
 #endif
+
 
