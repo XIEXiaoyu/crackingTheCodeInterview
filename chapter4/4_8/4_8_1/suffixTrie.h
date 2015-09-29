@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #ifndef __4_8_1_SUFFIX_TRIE_H__
 #define __4_8_1_SUFFIX_TRIE_H__
@@ -35,9 +36,10 @@ typedef struct TrieNode* TrieNode;
 /*
 	Given a string, add a '*' to the end of the string.
 	@argument	char*	word
+	@argument	char*	newWord
 	@return		void
 */
-void addEndingToString(char* word);
+void addEndingToString(char* word, char* newWord);
 
 /*
 	create a trie
@@ -66,12 +68,44 @@ void addEndChar(TrieNode inputNode, char key);
 	Add a word to the trie
 	@argument	TrieNode* root
 	@argument	char* word
-	@return 	void	
-*/
+	@return 	void
+*/	
+
 void addWord(TrieNode root, char* word);
 
 /*
-	Search a word in the trie
+	Search a character to see if its in the Node
+	@argument	TrieNode node
+	@argument	char key
+	@return 	TrieNode node
 */
+TrieNode searchChar(TrieNode node, char key);
+
+/*
+	Search a word in the trie
+	@argument	TrieNode root
+	@argument	char* word
+	@return 	bool true or false
+*/
+bool searchWord(TrieNode root, char* word);
+
+/*
+	Given a word, create a suffix trie.
+	@argument	char* word
+	@return		TrieNode root
+*/
+TrieNode createSuffixTrie(char* word);
+
+/*
+	Given a word, check if it is a substring of another string.
+
+	In this function, test if the first argument is the substring
+	of the second argument.
+	
+	@argument	char* word
+	@argument 	char* strTST(stringToSuffixTry)
+	@return		bool true or false
+*/
+bool isSubstring(char* word, char* strTST);
 
 #endif

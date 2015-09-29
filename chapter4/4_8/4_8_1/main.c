@@ -25,25 +25,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "suffixTrie.h"
 
 int main()
 {
-	TrieNode root = createTrie();
-
-	char arr[] = "bad";
-
-	addWord(root, arr);
-
-	printf("%c ", (root->next)[1]->key);
-	printf("%c ", ((root->next)[1]->next)[0]->key);
-	printf("%c ", (((root->next)[1]->next)[0]->next)[3]->key);
-	printf("%c ", ((((root->next)[1]->next)[0]->next)[3]->next)[26]->key);
-	printf("\n");
-
-
-
+	char word[] = "minimum";
+	char word1[] = "ini";
+	if(isSubstring(word1, word) == true)
+	{
+		printf("in\n");
+	}
+	else
+	{
+		printf("not in\n");
+	}
 
 	return 0;
 }  
