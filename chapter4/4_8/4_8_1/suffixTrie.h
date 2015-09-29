@@ -87,7 +87,7 @@ TrieNode searchChar(TrieNode node, char key);
 	@argument	char* word
 	@return 	bool true or false
 */
-bool searchWord(TrieNode root, char* word);
+//bool searchWord(TrieNode root, char* word);
 
 /*
 	Given a word, create a suffix trie.
@@ -101,7 +101,7 @@ TrieNode createSuffixTrie(char* word);
 
 	In this function, test if the first argument is the substring
 	of the second argument.
-	
+
 	@argument	char* word
 	@argument 	char* strTST(stringToSuffixTry)
 	@return		bool true or false

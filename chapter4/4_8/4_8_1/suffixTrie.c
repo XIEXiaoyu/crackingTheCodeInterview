@@ -72,31 +72,31 @@ TrieNode searchChar(TrieNode node, char key)
 	}
 }
 
-bool searchWord(TrieNode root, char* word)
-{
-	char newWord[80];
-	addEndingToString(word, newWord);
+// bool searchWord(TrieNode root, char* word)
+// {
+// 	char newWord[80];
+// 	addEndingToString(word, newWord);
 
-	TrieNode temp = root;
-	int i = 0;
-	while(newWord[i] != '*' && temp != NULL)
-	{
-		temp = searchChar(temp, newWord[i]);
-		i++;
-	}
-	if(temp == NULL)
-	{
-		return false;
-	}
-	if((temp->next)[26] == NULL)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
+// 	TrieNode temp = root;
+// 	int i = 0;
+// 	while(newWord[i] != '*' && temp != NULL)
+// 	{
+// 		temp = searchChar(temp, newWord[i]);
+// 		i++;
+// 	}
+// 	if(temp == NULL)
+// 	{
+// 		return false;
+// 	}
+// 	if((temp->next)[26] == NULL)
+// 	{
+// 		return false;
+// 	}
+// 	else
+// 	{
+// 		return true;
+// 	}
+// }
 
 TrieNode createSuffixTrie(char* word)
 {
