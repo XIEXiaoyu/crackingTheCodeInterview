@@ -7,7 +7,15 @@ void printBianryOfADecimal(double number)
 {
 	if(number >= 1 || number <= 0)
 	{
-		printf("ERROR\n");
+		if(number >=1)
+		{
+			printf("ERROR: number is larger than 1.\n");
+		}
+		else
+		{
+			printf("ERROR: number is less than 0.\n");
+		}
+		
 		return;
 	}
 
@@ -21,7 +29,7 @@ void printBianryOfADecimal(double number)
 	{
 		if(index > 31)
 		{
-			printf("ERROR\n");
+			printf("ERROR: out of 32 bits.\n");
 			return;
 		}
 		else
