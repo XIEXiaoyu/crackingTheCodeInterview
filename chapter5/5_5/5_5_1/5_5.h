@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#ifndef __5_4_H__
-#define __5_4_H__
+#ifndef __5_5_1_H__
+#define __5_5_1_H__
 /* 	Given a number and get the last bit of it.
 	@argument 	int nubmer
 	@return		int 0 or 1
