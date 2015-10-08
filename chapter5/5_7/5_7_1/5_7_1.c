@@ -156,22 +156,35 @@ void getMissNumEntry(int* arr, int length, int index, int* missNum)
 		return;
 	}
 
+	int misBit = 0;
 	int count0 = 0;
 	int count1 = 0;
-	int misBit = getMisBit(arr, length, index, &count0, &count1);
-	
-	if( count0 == 0 && count1 == 0)
+
+	if(length == 0)
 	{
+		misBit = 0;
 		insertBit(0, index, missNum);
+		index++;
+		getMissNumEntry(arr, 0, index, missNum);
+
 	}
 	else
 	{
+		misBit = getMisBit(arr, length, index, &count0, &count1);
 		insertBit(misBit, index, missNum);
 		int leftArray[length];
 		int leftArrayLength = discardNums(arr, length, misBit, index, leftArray);
-		int result[leftArrayLength];
-		getRealLeft(leftArray, leftArrayLength, result);
-		index++;
-		getMissNumEntry(result, leftArrayLength, index, missNum);
+		if(leftArrayLength == 0)
+		{
+			index++;
+			getMissNumEntry(leftArray, 0, index, missNum);
+		}
+		else
+		{
+			int result[leftArrayLength];
+			getRealLeft(leftArray, leftArrayLength, result);
+			index++;
+			getMissNumEntry(result, leftArrayLength, index, missNum);	
+		}
 	}
 }
