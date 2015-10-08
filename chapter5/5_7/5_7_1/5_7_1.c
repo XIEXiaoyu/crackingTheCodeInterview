@@ -188,3 +188,54 @@ void getMissNumEntry(int* arr, int length, int index, int* missNum)
 		}
 	}
 }
+
+/* 	A second method to discard array elements. In the previous method,
+	we need to create new int array to store the elements that come to 
+	the next round of computation. 
+	In this method, in each round, we use a mask to discard elements. 
+	For example, 3 whose bit representation is 0011, is missing.
+		bit3	bit2	bit1	bit0
+	0: 	0 		0 		0   	0
+	1: 	0 		0 		0 		1 	
+	2: 	0 		0 		1 		0
+	4: 	0 		1 		0 		0 
+	5: 	0 		1 		0 		1
+
+	From 0 to 5, number 3 is misssing. In the first around, we do no need
+	to discard any element to count 0s and 1s to decide 0 is missing or 1
+	is missing, and we found that 1 is missing. When come to the second 
+	round to decide if 0 or 1 is missing, we first need to discard all the 
+	elements whose bit0 is not 1. That is, we need to discard 0, 2 and 4 and
+	left with 1 and 5. Similarly, we need to discard 1 and 5 when comes to 
+	compute if 0 or 1 is missing in bit2.
+
+	We need a mask that can help us to dicard 0, 2, 4 when we compute bit 1
+	and discard 0, 2 and 4 plus 1 and 5 when computing bit2. 
+
+	To compute bit1, suppose we need to discard all the elements with bit0 of 1, 
+	then we need a mask1 of 0000, and result1 = mask ^ ***1. Negate result1 is 
+	***0. Clear the msb3, msb2, msb1 of the negated result1, we get 0000;
+	however result2 = mask ^ ***0 = ***0. After negating result2, we got ***1, 
+	after clearing msb3, msb2, msb1, we got 0001, which is nonzero. 
+
+	Our logic is that, every time we use a mask, then we detect the same 
+	condition that the ones, that **** ^ mask, then negate, then clear upper
+	bits, got 0s, are the ones that should be dicarded.
+
+	So, we proceed and need to discard more to calculate bit2. Suppose we need 
+	to dicard all the elements with bit1 of 0, which means we need to discard
+	all the elements whose endings are 01. According to our logic, then we need 
+	a mask2 that should be ended with 01, i.e, 0001. So this time result1 = 
+	mask2 ^ **01 = **11. Negate and clear the msb3 and msb2, we got 0000. 
+	Only elements with endings of 01 are computed to 0000, because if it is not
+	ended with 01, after xor with 01, there will be at least a 0 is generated, 
+	it could be 01 , 10 or 00. There will be at least a 1 left after negation, 
+	and of course, it will be not be 0 eventually.
+
+	@argument	int* arr
+	@argument 	... unfinished
+*/
+
+
+	
+
