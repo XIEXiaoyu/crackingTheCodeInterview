@@ -23,5 +23,7 @@ int main()
 
 	printScreen(arr);
 
+	printScreenInBits(arr);
+
 	return 0;
 }

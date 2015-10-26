@@ -61,10 +61,26 @@ void setEnd(char* arr, int x2);
 // @prarm	int 	y
 void drawHorizontalLine(char* arr, int x1, int x2, int y);
 
-// print the monochrome screen on the terminal screen
+// print the monochrome screen on the terminal screen in hexidemical format
 // @param 	char* 	arr
 // @return 	void
 void printScreen(char* arr);
+
+//	Get a bit from a char
+//	@param 	char 			a 
+//	@param	int 			bitIndex
+// 	@return unsigned int 	bitValue
+unsigned int getBit(char a, int bitIndex);
+
+// 	printf one char in bits
+// 	@param	char a
+// 	@return void
+void printAChar(char a);
+
+// print the monochrome screen on the terminal screen in bits
+// @param 	char* 	arr
+// @return 	void
+void printScreenInBits(char* arr);
 
 #endif
 

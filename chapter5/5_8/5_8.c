@@ -140,9 +140,6 @@ void drawHorizontalLine(char* arr, int x1, int x2, int y)
 	}
 }
 
-// print the monochrome screen on the terminal screen
-// @param 	char* 	arr
-// @return 	void
 void printScreen(char* arr)
 {
 	for(int i = 0; i < HEIGHT / 8; i++)
@@ -154,3 +151,43 @@ void printScreen(char* arr)
 		printf("\n");
 	}
 }
+
+unsigned int getBit(char a, int bitIndex)
+{
+	char mask = 1 << bitIndex;
+
+	unsigned int bitValue = mask & a;
+
+	if(bitValue > 0)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	} 
+}	
+
+void printAChar(char a)
+{
+	unsigned int bitValue = 0;
+	for(int i = 7; i >=0; i--)
+	{
+		bitValue = getBit(a, i);
+		printf("%d", bitValue);
+	}
+	printf(" ");
+}
+
+void printScreenInBits(char* arr)
+{
+	for(int i = 0; i < HEIGHT / 8; i++)
+	{
+		for(int j = 0; j < WIDTH / 8; j++)
+		{
+			printAChar(arr[i * (WIDTH / 8) + j]);
+		}
+		printf("\n");
+	}
+}
+
